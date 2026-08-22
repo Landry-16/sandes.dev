@@ -19,7 +19,7 @@ import SkillsSection from '@/components/Sections/SkillsSection';
 import ContactSection from '@/components/Sections/ContactSection';
 import AnimatedBackgroundBlobs from '@/components/Common/AnimatedBackgroundBlobs';
 
-const AMBIENT_BLOBS = [{ className: 'top-1/4 right-1/4 w-1/3 h-1/3 bg-amber-900/20', duration: 25 }];
+const AMBIENT_BLOBS = [{ className: 'top-1/3 right-1/4 w-1/3 h-1/3 bg-accent/20', duration: 25 }];
 
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState('home');
@@ -39,7 +39,7 @@ export default function Portfolio() {
   }, [handleNavigation]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-teal-950 via-slate-900 to-teal-950 text-slate-100 font-serif overflow-x-hidden relative">
+    <div className="min-h-screen bg-gradient-to-br from-black via-slate-950 to-black text-text font-serif overflow-x-hidden relative">
       <Navigation activeSection={activeSection} onNavigate={handleNavigation} />
 
       <main className="relative z-10">

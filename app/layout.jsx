@@ -1,10 +1,10 @@
 import '@/styles/globals.css';
 
 export const metadata = {
-  title: 'Sandes | Computer Science Student & Developer',
-  description: 'Portfolio of Sandes - A third-year CS student at Epitech Paris. Passionate about building elegant solutions and exploring the intersection of code and creativity.',
+  title: 'Sandes | CS Student & Developer',
+  description: 'Portfolio of Sandes - Third-year CS student at Epitech Paris. Building elegant solutions with code and prose.',
   icons: {
-    icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90" font-family="serif" font-weight="bold" fill="%23d4af37">S</text></svg>',
+    icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90" font-family="serif" font-weight="bold" fill="%23d4697d">S</text></svg>',
   },
 };
 
