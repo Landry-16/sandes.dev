@@ -1,4 +1,4 @@
-import Portfolio from './components/Portfolio';
+import Portfolio from '@/components/Portfolio';
 
 export const metadata = {
   title: 'Sandes | Computer Science Student & Developer',
