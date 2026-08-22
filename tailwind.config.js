@@ -9,23 +9,17 @@ module.exports = {
     extend: {
       fontFamily: {
         serif: ['Lora', 'Georgia', 'serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
       },
       colors: {
-        // Tailwind's default amber scale already fits the theme; only the
-        // luxurious gold accent used across CTAs and highlights is added.
-        amber: {
-          accent: '#d4af37',
-        },
-        // Deepen the darkest teal shades into a warm teal-black for
-        // backgrounds; 50-800 keep Tailwind's default teal scale.
-        teal: {
-          900: '#0a2e3d',
-          950: '#051920',
-        },
-      },
-      boxShadow: {
-        glow: '0 0 20px rgba(212, 175, 55, 0.3)',
-        'glow-lg': '0 0 40px rgba(212, 175, 55, 0.2)',
+        // Option 1: Noir Pur + Rose Mauve
+        primary: '#0f0f0f',
+        secondary: '#1a1a1a',
+        tertiary: '#2d2d2d',
+        accent: '#d4697d',
+        light: '#faf7f2',
+        text: '#e5e0d8',
+        textMuted: '#9b8b7e',
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',
