@@ -1,6 +1,6 @@
 # Sandes Portfolio
 
-A dark academia portfolio built with Next.js 14, React 18, Tailwind CSS, and Framer Motion. A deep teal-black background, a luxurious gold accent, and serif typography set the tone; smooth scroll animations carry the reader through each section.
+A portfolio built with Next.js 14, React 18, Tailwind CSS, and Framer Motion. A noir pur (#0f0f0f) background, a rose mauve (#d4697d) accent, and serif typography set the tone; smooth scroll animations carry the reader through each section.
 
 ## Tech stack
 
@@ -83,12 +83,14 @@ Site metadata (title, description) lives in [app/layout.jsx](app/layout.jsx) and
 
 ### Changing the color scheme
 
-The palette is defined in [tailwind.config.js](tailwind.config.js) under `theme.extend.colors`:
+The palette is Option 1 from `BUILD_FINAL_OPTION1.md` (Noir Pur + Rose Mauve), defined as flat colors in [tailwind.config.js](tailwind.config.js) under `theme.extend.colors`:
 
-- `amber.accent` is the gold accent used for CTAs, highlights, and the scrollbar
-- `teal.900` / `teal.950` are the deep teal-black background shades
+- `primary` (`#0f0f0f`), `secondary` (`#1a1a1a`), `tertiary` (`#2d2d2d`) - background layers
+- `accent` (`#d4697d`) - CTAs, highlights, borders, the scrollbar thumb
+- `light` (`#faf7f2`) - headings
+- `text` (`#e5e0d8`) / `textMuted` (`#9b8b7e`) - body copy and secondary text
 
-Everything else (`amber-50` through `amber-900`, `teal-50` through `teal-800`) comes from Tailwind's default palette. Adjust the overrides there, or swap the `teal`/`amber` utility classes across `components/` for another color pair.
+A raw hex reference for these also lives in [lib/colors.js](lib/colors.js). Adjust the values in `tailwind.config.js` to retheme the whole site.
 
 ### Changing the typeface
 
