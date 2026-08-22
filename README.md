@@ -1,6 +1,6 @@
 # Sandes Portfolio
 
-A dark academia portfolio built with Next.js 14, React 18, Tailwind CSS, and Framer Motion. Deep slate backgrounds, warm amber accents, and serif typography set the tone; smooth scroll animations carry the reader through each section.
+A dark academia portfolio built with Next.js 14, React 18, Tailwind CSS, and Framer Motion. A deep teal-black background, a luxurious gold accent, and serif typography set the tone; smooth scroll animations carry the reader through each section.
 
 ## Tech stack
 
@@ -24,16 +24,38 @@ Visit `http://localhost:3000` to view the site. Changes hot reload automatically
 ```
 sandes.dev/
 ├── app/
-│   ├── layout.jsx              # Root layout (HTML structure, metadata)
-│   ├── page.jsx                # Home page (imports Portfolio component)
-│   ├── globals.css             # Global styles & Tailwind directives
-│   └── components/
-│       └── Portfolio.jsx       # Main portfolio component (all sections)
-├── public/                     # Static assets
-├── tailwind.config.js          # Tailwind customization
-├── postcss.config.js           # PostCSS config for Tailwind
-├── next.config.js              # Next.js configuration
-├── package.json                # Dependencies & scripts
+│   ├── layout.jsx                       # Root layout (HTML structure, metadata)
+│   └── page.jsx                         # Home page (renders Portfolio)
+├── components/
+│   ├── Portfolio.jsx                    # Orchestrator: nav state and section order
+│   ├── Navigation/
+│   │   ├── Navigation.jsx               # Fixed nav bar
+│   │   └── NavLink.jsx                  # Single nav button with active underline
+│   ├── Sections/
+│   │   ├── HeroSection.jsx
+│   │   ├── AboutSection.jsx
+│   │   ├── ProjectsSection.jsx
+│   │   ├── SkillsSection.jsx
+│   │   └── ContactSection.jsx
+│   └── Common/
+│       ├── SectionHeading.jsx           # Title + underline, used by every section
+│       ├── ProjectCard.jsx
+│       ├── SkillCategory.jsx
+│       ├── SocialLink.jsx
+│       └── AnimatedBackgroundBlobs.jsx  # Shared ambient background effect
+├── lib/
+│   ├── constants.js                     # Projects, skills, social links, nav items
+│   ├── animations.js                    # Shared Framer Motion variants
+│   ├── colors.js                        # Raw hex reference for the palette
+│   └── config.js                        # Site identity, nav, and SEO defaults
+├── styles/
+│   └── globals.css                      # Global styles & Tailwind directives
+├── public/                              # Static assets
+├── jsconfig.json                        # "@/*" path alias to the project root
+├── tailwind.config.js                   # Tailwind customization
+├── postcss.config.js                    # PostCSS config for Tailwind
+├── next.config.js                       # Next.js configuration
+├── package.json                         # Dependencies & scripts
 └── .gitignore
 ```
 
@@ -47,23 +69,30 @@ sandes.dev/
 
 ## Customization
 
-The main content lives in [app/components/Portfolio.jsx](app/components/Portfolio.jsx). Look for `CUSTOMIZE` comments to update:
+Content lives in [lib/constants.js](lib/constants.js):
 
-- Your name and introduction (hero section)
-- The `projects` array (title, description, tags, links)
-- The `skills` object (categories and skill lists)
-- The about section paragraphs
-- Contact links (email, GitHub, LinkedIn)
+- `PROJECTS` - title, description, tags, links
+- `SKILLS` - categories and their skill lists
+- `SOCIAL_LINKS` - email, GitHub, LinkedIn
+- `SITE_METADATA` - name, title, description
+- `NAV_ITEMS` - the navigation bar's sections
+
+The hero introduction and about-section paragraphs live directly in [components/Sections/HeroSection.jsx](components/Sections/HeroSection.jsx) and [components/Sections/AboutSection.jsx](components/Sections/AboutSection.jsx).
 
 Site metadata (title, description) lives in [app/layout.jsx](app/layout.jsx) and [app/page.jsx](app/page.jsx).
 
 ### Changing the color scheme
 
-The amber palette is defined in [tailwind.config.js](tailwind.config.js) under `theme.extend.colors.amber`. Adjust the hex values there, or swap the `amber` utility classes throughout `Portfolio.jsx` for another Tailwind color.
+The palette is defined in [tailwind.config.js](tailwind.config.js) under `theme.extend.colors`:
+
+- `amber.accent` is the gold accent used for CTAs, highlights, and the scrollbar
+- `teal.900` / `teal.950` are the deep teal-black background shades
+
+Everything else (`amber-50` through `amber-900`, `teal-50` through `teal-800`) comes from Tailwind's default palette. Adjust the overrides there, or swap the `teal`/`amber` utility classes across `components/` for another color pair.
 
 ### Changing the typeface
 
-The serif font (Lora) is imported in [app/globals.css](app/globals.css) and registered in [tailwind.config.js](tailwind.config.js) under `theme.extend.fontFamily.serif`. Swap in a different Google Font in both places to change the typography.
+The serif font (Lora) is imported in [styles/globals.css](styles/globals.css) and registered in [tailwind.config.js](tailwind.config.js) under `theme.extend.fontFamily.serif`. Swap in a different Google Font in both places to change the typography.
 
 ## Available scripts
 
