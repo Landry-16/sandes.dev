@@ -16,7 +16,7 @@ export default function ContactSection() {
   const year = new Date().getFullYear();
 
   return (
-    <section id="contact" className="min-h-screen flex items-center justify-center py-20 relative">
+    <section id="contact" className="min-h-screen flex items-center justify-center py-32 relative">
       <div className="max-w-2xl mx-auto px-6 w-full text-center">
         <motion.div
           initial="hidden"
@@ -26,7 +26,7 @@ export default function ContactSection() {
         >
           <SectionHeading
             title="Get in Touch"
-            subtitle="Let's talk code, books, and ideas"
+            subtitle="Let's collaborate"
             className="flex flex-col items-center text-center"
           />
 
@@ -35,7 +35,7 @@ export default function ContactSection() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="text-slate-400 text-lg mt-6 mb-12 leading-relaxed"
+            className="text-text text-lg mt-8 mb-12 leading-relaxed"
           >
             I&apos;m always interested in hearing about new opportunities, interesting projects, or just chatting about code, books, and ideas.
           </motion.p>
@@ -52,8 +52,8 @@ export default function ContactSection() {
             ))}
           </motion.div>
 
-          <p className="text-slate-500 text-sm">
-            &copy; {year} {SITE_METADATA.name}. Built with React, Next.js, and a love for clean code.
+          <p className="text-textMuted text-sm">
+            &copy; {year} {SITE_METADATA.name}. Built with React, Next.js, and a love for elegant design.
           </p>
         </motion.div>
       </div>

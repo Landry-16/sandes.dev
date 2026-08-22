@@ -14,18 +14,18 @@ import { SKILLS } from '@/lib/constants';
 
 export default function SkillsSection() {
   return (
-    <section id="skills" className="py-20 relative">
-      <div className="max-w-4xl mx-auto px-6 w-full">
+    <section id="skills" className="py-32 relative">
+      <div className="max-w-6xl mx-auto px-6 w-full">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={scrollFadeInVariants}
         >
-          <SectionHeading title="Skills" subtitle="Tools of the trade" />
+          <SectionHeading title="Skills" subtitle="Technologies & tools" />
 
           <motion.div
-            className="grid md:grid-cols-2 gap-8 mt-12"
+            className="grid md:grid-cols-2 gap-8 mt-16"
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"

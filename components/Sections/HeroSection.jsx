@@ -14,8 +14,8 @@ import { containerVariants, itemVariants } from '@/lib/animations';
 import AnimatedBackgroundBlobs from '@/components/Common/AnimatedBackgroundBlobs';
 
 const HERO_BLOBS = [
-  { className: 'top-10 left-10 w-96 h-96 bg-amber-900/40', duration: 15 },
-  { className: 'bottom-10 right-10 w-96 h-96 bg-teal-900/20', duration: 20, delay: 1 },
+  { className: 'top-10 left-10 w-96 h-96 bg-accent/20', duration: 15 },
+  { className: 'bottom-10 right-10 w-96 h-96 bg-accent/10', duration: 20, delay: 1 },
 ];
 
 export default function HeroSection({ onCTA }) {
@@ -24,7 +24,7 @@ export default function HeroSection({ onCTA }) {
       id="home"
       className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20"
     >
-      <AnimatedBackgroundBlobs blobs={HERO_BLOBS} />
+      <AnimatedBackgroundBlobs blobs={HERO_BLOBS} opacity={30} />
 
       <motion.div
         className="relative z-10 text-center max-w-3xl px-6"
@@ -33,22 +33,22 @@ export default function HeroSection({ onCTA }) {
         animate="visible"
       >
         <motion.div variants={itemVariants} className="mb-8">
-          <p className="text-amber-300/80 text-sm uppercase tracking-[0.3em] font-semibold mb-3">
+          <p className="text-accent/70 text-sm uppercase tracking-[0.3em] font-semibold mb-3">
             Welcome to my digital study
           </p>
 
-          <h1 className="text-6xl md:text-7xl font-bold text-amber-50 leading-tight mb-6 font-serif">
+          <h1 className="text-7xl md:text-8xl font-bold text-light leading-tight mb-6 font-serif">
             Sandes
           </h1>
 
-          <p className="text-2xl text-amber-200/80 italic font-serif">
+          <p className="text-2xl text-accent/80 italic font-serif">
             Computer Science Student | Builder | Writer
           </p>
         </motion.div>
 
         <motion.p
           variants={itemVariants}
-          className="text-slate-300 text-lg leading-relaxed max-w-2xl mx-auto mb-14"
+          className="text-text text-lg leading-relaxed max-w-2xl mx-auto mb-14"
         >
           Third year at Epitech Paris. Passionate about crafting elegant solutions to complex problems, both in code and in prose.
         </motion.p>
@@ -58,7 +58,7 @@ export default function HeroSection({ onCTA }) {
           onClick={onCTA}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="inline-flex items-center gap-3 px-10 py-4 bg-gradient-to-r from-amber-accent to-amber-400 text-teal-950 font-bold text-lg rounded-xl hover:from-amber-400 hover:to-amber-300 transition-all shadow-lg hover:shadow-glow-lg"
+          className="inline-flex items-center gap-3 px-10 py-4 bg-gradient-to-r from-accent to-pink-400 text-black font-bold text-lg rounded-xl hover:from-pink-300 hover:to-pink-400 transition-all shadow-lg hover:shadow-2xl hover:shadow-accent/30"
         >
           View My Work
           <ChevronDown className="w-5 h-5 animate-bounce" />
@@ -71,11 +71,11 @@ export default function HeroSection({ onCTA }) {
         transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
         aria-hidden="true"
       >
-        <div className="w-7 h-11 border-2 border-amber-400/50 rounded-full flex items-center justify-center hover:border-amber-300 transition-colors">
+        <div className="w-7 h-11 border-2 border-accent/40 rounded-full flex items-center justify-center hover:border-accent transition-colors">
           <motion.div
             animate={{ y: [0, 6, 0] }}
             transition={{ duration: 2.5, repeat: Infinity }}
-            className="w-1.5 h-2.5 bg-amber-400 rounded-full"
+            className="w-1.5 h-2.5 bg-accent rounded-full"
           />
         </div>
       </motion.div>
