@@ -3,10 +3,14 @@ import './globals.css';
 export const metadata = {
   title: 'Sandes | Computer Science Student & Developer',
   description: 'Portfolio of Sandes - A third-year CS student at Epitech Paris. Passionate about building elegant solutions and exploring the intersection of code and creativity.',
-  viewport: 'width=device-width, initial-scale=1',
   icons: {
     icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90" font-family="serif" font-weight="bold" fill="%23b8956f">S</text></svg>',
   },
+};
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
 };
 
 export default function RootLayout({ children }) {
