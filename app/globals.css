@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Lora', serif;
+  background: linear-gradient(to bottom right, #0f172a, #0f1419, #0f172a);
+  color: #e2e8f0;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar for dark theme */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1e293b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #b8956f;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a37d4f;
+}
+
+/* Text selection styling */
+::selection {
+  background-color: #b8956f;
+  color: #0f172a;
+}
