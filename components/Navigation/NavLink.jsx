@@ -20,7 +20,7 @@ export default function NavLink({ item, isActive, onClick }) {
     <motion.button
       onClick={onClick}
       className={`text-sm font-medium uppercase tracking-wider transition-colors relative ${
-        isActive ? 'text-amber-300' : 'text-slate-400 hover:text-amber-200'
+        isActive ? 'text-accent' : 'text-textMuted hover:text-text'
       }`}
       whileHover={{ y: -2 }}
       whileTap={{ scale: 0.95 }}
@@ -31,7 +31,7 @@ export default function NavLink({ item, isActive, onClick }) {
       {isActive && (
         <motion.div
           layoutId="activeUnderline"
-          className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 to-transparent rounded-full"
+          className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-accent to-transparent rounded-full"
           transition={{ duration: 0.3 }}
         />
       )}

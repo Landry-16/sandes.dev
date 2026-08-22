@@ -15,7 +15,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { titleVariants, itemVariants } from '@/lib/animations';
+import { titleVariants } from '@/lib/animations';
 
 export default function SectionHeading({ title, subtitle, className = '' }) {
   return (
@@ -26,16 +26,16 @@ export default function SectionHeading({ title, subtitle, className = '' }) {
       variants={titleVariants}
       className={className}
     >
-      <h2 className="text-4xl md:text-5xl font-bold text-amber-50 mb-3">
+      <h2 className="text-5xl md:text-6xl font-bold text-light mb-3">
         {title}
       </h2>
 
-      <div className="w-24 h-1.5 bg-gradient-to-r from-amber-accent via-amber-300 to-transparent rounded-full mb-6" />
+      <div className="w-24 h-1.5 bg-gradient-to-r from-accent to-transparent rounded-full mb-6" />
 
       {subtitle && (
-        <motion.p variants={itemVariants} className="text-lg text-amber-200/70 italic">
+        <p className="text-lg text-accent/70 italic font-serif">
           {subtitle}
-        </motion.p>
+        </p>
       )}
     </motion.div>
   );

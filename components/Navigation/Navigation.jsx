@@ -19,13 +19,13 @@ import NavLink from './NavLink';
 
 export default function Navigation({ activeSection = 'home', onNavigate }) {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-b from-teal-950/95 via-teal-950/90 to-transparent backdrop-blur-xl border-b border-amber-600/20">
-      <div className="max-w-4xl mx-auto px-6 py-5 flex justify-between items-center">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-b from-black/95 via-black/90 to-transparent backdrop-blur-xl border-b border-accent/10">
+      <div className="max-w-6xl mx-auto px-6 py-5 flex justify-between items-center">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-2xl font-bold text-amber-100 font-serif"
+          className="text-2xl font-bold text-light font-serif"
         >
           sandes
         </motion.div>
