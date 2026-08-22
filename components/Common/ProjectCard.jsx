@@ -27,7 +27,7 @@ export default function ProjectCard({ project }) {
       variants={itemVariants}
       whileHover={{ y: -8 }}
       transition={{ duration: 0.3 }}
-      className="group bg-gradient-to-br from-teal-900/30 to-slate-900/40 border border-amber-600/20 hover:border-amber-500/60 hover:shadow-glow rounded-xl p-8 backdrop-blur-sm transition-colors transition-shadow duration-300"
+      className="card group p-8 backdrop-blur-sm hover:border-amber-500/60 hover:shadow-glow transition-colors transition-shadow duration-300"
     >
       <div className="flex justify-between items-start mb-4 gap-4">
         <h3 className="text-2xl font-bold text-amber-100 group-hover:text-amber-200 transition-colors flex-1">

@@ -24,7 +24,7 @@ export default function SkillCategory({ category }) {
   return (
     <motion.div
       variants={itemVariants}
-      className="bg-gradient-to-br from-teal-900/30 to-slate-900/40 border border-amber-600/20 hover:border-amber-500/40 rounded-xl p-6 transition-colors"
+      className="card p-6 hover:border-amber-500/40 transition-colors"
     >
       <div className="flex items-center gap-3 mb-1">
         {Icon && <Icon className="w-5 h-5 text-amber-accent" aria-hidden="true" />}
