@@ -1,5 +1,5 @@
 /**
- * Skill category card, lists the skills for one category with its icon.
+ * Skill category card, lists the skills for one category.
  *
  * @component
  * @param {Object} props
@@ -12,32 +12,23 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Code, Palette, Server, Wrench } from 'lucide-react';
 import { itemVariants } from '@/lib/animations';
 
-const ICONS = { Code, Palette, Server, Wrench };
-
 export default function SkillCategory({ category }) {
-  const { name, description, items, icon } = category;
-  const Icon = ICONS[icon];
+  const { name, items } = category;
 
   return (
     <motion.div
       variants={itemVariants}
-      className="card p-6 hover:border-amber-500/40 transition-colors"
+      className="card p-6 hover:border-accent/40 transition-colors"
     >
-      <div className="flex items-center gap-3 mb-1">
-        {Icon && <Icon className="w-5 h-5 text-amber-accent" aria-hidden="true" />}
-        <h3 className="text-xl font-bold text-amber-200">{name}</h3>
-      </div>
-
-      <p className="text-slate-400 text-sm mb-4">{description}</p>
+      <h3 className="text-xl font-bold text-accent mb-4">{name}</h3>
 
       <div className="flex flex-wrap gap-2">
         {items.map((skill) => (
           <span
             key={skill}
-            className="px-3 py-2 bg-amber-900/20 border border-amber-700/40 text-slate-200 text-sm rounded-lg hover:bg-amber-900/40 transition-colors"
+            className="px-3 py-2 bg-accent/10 border border-accent/30 text-text text-sm rounded-lg hover:bg-accent/20 transition-all"
           >
             {skill}
           </span>

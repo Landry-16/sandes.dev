@@ -7,13 +7,14 @@
  * @param {Array<{className: string, duration?: number, delay?: number}>} props.blobs
  *   Each entry positions and sizes one blob via className, and controls its
  *   drift timing.
+ * @param {number} [props.opacity=40] - Wrapper opacity as a percentage (0-100)
  * @returns {JSX.Element}
  *
  * @example
  * <AnimatedBackgroundBlobs
  *   blobs={[
- *     { className: 'top-10 left-10 w-96 h-96 bg-amber-900/40', duration: 15 },
- *     { className: 'bottom-10 right-10 w-96 h-96 bg-teal-900/20', duration: 20, delay: 1 },
+ *     { className: 'top-10 left-10 w-96 h-96 bg-accent/20', duration: 15 },
+ *     { className: 'bottom-10 right-10 w-96 h-96 bg-accent/10', duration: 20, delay: 1 },
  *   ]}
  * />
  */
@@ -22,9 +23,13 @@
 import { motion } from 'framer-motion';
 import { getBlobDrift } from '@/lib/animations';
 
-export default function AnimatedBackgroundBlobs({ blobs }) {
+export default function AnimatedBackgroundBlobs({ blobs, opacity = 40 }) {
   return (
-    <div className="absolute inset-0 opacity-40 pointer-events-none" aria-hidden="true">
+    <div
+      className="absolute inset-0 pointer-events-none"
+      style={{ opacity: opacity / 100 }}
+      aria-hidden="true"
+    >
       {blobs.map(({ className, duration, delay }, index) => {
         const { animate, transition } = getBlobDrift(duration, delay);
         return (
