@@ -1,0 +1,39 @@
+.marker {
+  position: relative;
+  margin-left: 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--gold);
+  cursor: help;
+  border-bottom: 1px dotted rgba(var(--gold-rgb), 0.6);
+}
+
+.marker:hover {
+  color: var(--vellum);
+}
+
+.tooltip {
+  position: absolute;
+  left: 0;
+  top: 140%;
+  width: 260px;
+  padding: 12px 14px;
+  border: 1px solid rgba(var(--gold-rgb), 0.3);
+  background: var(--panel-solid);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--vellum-dim);
+  opacity: 0;
+  transform: translateY(4px);
+  transition:
+    opacity 400ms ease,
+    transform 400ms ease;
+  pointer-events: none;
+  z-index: 7;
+}
+
+.tooltipVisible {
+  opacity: 1;
+  transform: none;
+}
