@@ -1,0 +1,78 @@
+.section {
+  padding-bottom: clamp(64px, 14vh, 150px);
+}
+
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(28px, 5vw, 70px);
+}
+
+.main {
+  flex: 1 1 480px;
+  min-width: 300px;
+}
+
+.paragraph {
+  margin: 0 0 24px;
+  font-size: clamp(19px, 1.5vw, 22px);
+  line-height: 1.68;
+  color: var(--vellum-soft);
+  text-wrap: pretty;
+}
+
+.paragraph:last-child {
+  margin-bottom: 0;
+}
+
+.dropCap {
+  float: left;
+  margin: 6px 14px 0 0;
+  font-family: var(--font-display);
+  font-size: 78px;
+  line-height: 0.78;
+  color: var(--oxblood);
+}
+
+.aside {
+  flex: 0 1 280px;
+  min-width: 220px;
+  border-left: 1px solid rgba(var(--gold-rgb), 0.2);
+  padding-left: clamp(18px, 2vw, 28px);
+}
+
+.portraitFrame {
+  height: 300px;
+  margin-bottom: 22px;
+}
+
+.portraitCaption {
+  margin: 0 0 18px;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--sepia-dim);
+}
+
+.fact {
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(var(--gold-rgb), 0.12);
+}
+
+.factLabel {
+  margin: 0 0 4px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--sepia-dim);
+}
+
+.factValue {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 21px;
+  line-height: 1.35;
+  color: var(--vellum-dim);
+}

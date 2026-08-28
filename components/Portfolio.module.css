@@ -1,0 +1,16 @@
+.page {
+  position: relative;
+  min-height: 100vh;
+  background: rgb(var(--ink-rgb));
+  color: var(--vellum);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+.column {
+  position: relative;
+  z-index: 2;
+  margin: 0 auto;
+  max-width: 1180px;
+  padding: 0 clamp(20px, 5vw, 88px) 0;
+}
