@@ -1,14 +1,14 @@
-# Sandes Portfolio
+# Sandes Savarimuthu, Portfolio
 
-A portfolio built with Next.js 14, React 18, Tailwind CSS, and Framer Motion. A noir pur (#0f0f0f) background, a rose mauve (#d4697d) accent, and serif typography set the tone; smooth scroll animations carry the reader through each section.
+Dark Academia / Scriptorium: an illuminated-manuscript portfolio built with Next.js 14 and React 18. Ink on vellum, read by candlelight. Built from a Claude Design import (`Portfolio.dc.html`).
 
 ## Tech stack
 
 - Next.js 14 (app router)
 - React 18
-- Tailwind CSS 3
-- Framer Motion 10
-- Lucide React icons
+- Plain CSS: CSS Modules per component, global custom properties for the palette and type scale
+
+No Tailwind, no animation library. The design is a single bespoke editorial layout (precise `clamp()` typography, one-off `rgba()` opacities per element), which plain CSS expresses more directly than a utility-class system built for consistent, repeated patterns.
 
 ## Getting started
 
@@ -17,84 +17,50 @@ npm install
 npm run dev
 ```
 
-Visit `http://localhost:3000` to view the site. Changes hot reload automatically.
+Visit `http://localhost:3000`.
 
 ## Project structure
 
 ```
 sandes.dev/
 ├── app/
-│   ├── layout.jsx                       # Root layout (HTML structure, metadata)
-│   └── page.jsx                         # Home page (renders Portfolio)
+│   ├── layout.jsx          # Root layout, metadata, font preconnects
+│   ├── page.jsx             # Renders Portfolio
+│   └── globals.css          # Palette (CSS custom properties), fonts, reset, shared keyframes
 ├── components/
-│   ├── Portfolio.jsx                    # Orchestrator: nav state and section order
-│   ├── Navigation/
-│   │   ├── Navigation.jsx               # Fixed nav bar
-│   │   └── NavLink.jsx                  # Single nav button with active underline
-│   ├── Sections/
-│   │   ├── HeroSection.jsx
-│   │   ├── AboutSection.jsx
-│   │   ├── ProjectsSection.jsx
-│   │   ├── SkillsSection.jsx
-│   │   └── ContactSection.jsx
-│   └── Common/
-│       ├── SectionHeading.jsx           # Title + underline, used by every section
-│       ├── ProjectCard.jsx
-│       ├── SkillCategory.jsx
-│       ├── SocialLink.jsx
-│       └── AnimatedBackgroundBlobs.jsx  # Shared ambient background effect
+│   ├── Portfolio.jsx        # Atmosphere + the single centered column
+│   ├── Atmosphere.jsx        # Candlelight (cursor-follow), vignette, grain
+│   ├── Reveal.jsx            # Scroll-reveal wrapper (IntersectionObserver + 4s failsafe)
+│   ├── ImagePlate.jsx        # Framed image slot; shows a caption placeholder until src is set
+│   ├── Navigation.jsx
+│   ├── Header.jsx            # Masthead: illuminated initial, name, motto
+│   ├── SectionTitle.jsx      # Shared heading row (title + mono label + hairline)
+│   ├── WorksSection.jsx      # Folio of project entries, plus the reserved blank leaf
+│   ├── AboutSection.jsx      # Drop-cap intro, footnote, portrait and facts
+│   ├── Footnote.jsx          # Hover/focus-triggered footnote tooltip
+│   └── ColophonSection.jsx   # Contact links and edition note
 ├── lib/
-│   ├── constants.js                     # Projects, skills, social links, nav items
-│   ├── animations.js                    # Shared Framer Motion variants
-│   ├── colors.js                        # Raw hex reference for the palette
-│   └── config.js                        # Site identity, nav, and SEO defaults
-├── styles/
-│   └── globals.css                      # Global styles & Tailwind directives
-├── public/                              # Static assets
-├── jsconfig.json                        # "@/*" path alias to the project root
-├── tailwind.config.js                   # Tailwind customization
-├── postcss.config.js                    # PostCSS config for Tailwind
-├── next.config.js                       # Next.js configuration
-├── package.json                         # Dependencies & scripts
+│   └── content.js            # Works, facts, contact links, site metadata
+├── public/
+├── jsconfig.json             # "@/*" path alias to the project root
+├── next.config.js
+├── package.json
 └── .gitignore
 ```
 
-## Sections
+## Content
 
-- **Home**: hero with animated intro and scroll indicator
-- **About**: personal story and a stacked-books illustration
-- **Projects**: cards with descriptions, tags, and links
-- **Skills**: technical skills grouped by category
-- **Contact**: social links and footer
+All copy lives in [lib/content.js](lib/content.js): `WORKS`, `FACTS`, `CONTACT_LINKS`, `SITE`, `NAV_ITEMS`. The header's opening paragraph and Latin motto, and the About section's three paragraphs, live directly in [components/Header.jsx](components/Header.jsx) and [components/AboutSection.jsx](components/AboutSection.jsx).
 
-## Customization
+Before publishing, replace:
 
-Content lives in [lib/constants.js](lib/constants.js):
+- The email address and GitHub/LinkedIn/CV links in `CONTACT_LINKS`
+- The image plates: pass a `src` to the `<ImagePlate>` calls in `Header.jsx`, `WorksSection.jsx`, and `AboutSection.jsx` (illuminated initial, one plate per project, and the portrait); until then each shows its caption as a placeholder
+- The third project's working title ("Untitled writing desk")
 
-- `PROJECTS` - title, description, tags, links
-- `SKILLS` - categories and their skill lists
-- `SOCIAL_LINKS` - email, GitHub, LinkedIn
-- `SITE_METADATA` - name, title, description
-- `NAV_ITEMS` - the navigation bar's sections
+## Design system
 
-The hero introduction and about-section paragraphs live directly in [components/Sections/HeroSection.jsx](components/Sections/HeroSection.jsx) and [components/Sections/AboutSection.jsx](components/Sections/AboutSection.jsx).
-
-Site metadata (title, description) lives in [app/layout.jsx](app/layout.jsx) and [app/page.jsx](app/page.jsx).
-
-### Changing the color scheme
-
-The palette is Option 1 from `BUILD_FINAL_OPTION1.md` (Noir Pur + Rose Mauve), defined as flat colors in [tailwind.config.js](tailwind.config.js) under `theme.extend.colors`:
-
-- `primary` (`#0f0f0f`), `secondary` (`#1a1a1a`), `tertiary` (`#2d2d2d`) - background layers
-- `accent` (`#d4697d`) - CTAs, highlights, borders, the scrollbar thumb
-- `light` (`#faf7f2`) - headings
-- `text` (`#e5e0d8`) / `textMuted` (`#9b8b7e`) - body copy and secondary text
-
-A raw hex reference for these also lives in [lib/colors.js](lib/colors.js). Adjust the values in `tailwind.config.js` to retheme the whole site.
-
-### Changing the typeface
-
-The serif font (Lora) is imported in [styles/globals.css](styles/globals.css) and registered in [tailwind.config.js](tailwind.config.js) under `theme.extend.fontFamily.serif`. Swap in a different Google Font in both places to change the typography.
+The full design system, including the color table, type scale, spacing rules, and the tone of the copy, is documented in [design/design.md](design/design.md).
 
 ## Available scripts
 
@@ -107,10 +73,4 @@ npm run lint        # Check for code issues
 
 ## Deployment
 
-The project deploys cleanly to Vercel:
-
-1. Push the repository to GitHub
-2. Import it at [vercel.com](https://vercel.com)
-3. Vercel auto-detects Next.js and deploys on push
-
-Netlify, Railway, and Render also support Next.js if you prefer a different host.
+Deploys cleanly to Vercel: push to GitHub, import the repository at [vercel.com](https://vercel.com), and it auto-detects Next.js.
