@@ -4,7 +4,7 @@
   background: rgb(var(--ink-rgb));
   color: var(--vellum);
   font-family: var(--font-body);
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 .column {
