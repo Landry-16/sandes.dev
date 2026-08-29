@@ -28,7 +28,7 @@ export default function Header() {
     <header className={styles.header}>
       <div data-parallax=".22" className={styles.ruleRow}>
         <span className={styles.ruleLeft} aria-hidden="true" />
-        <span className={styles.ruleLabel}>Folio of works &amp; days</span>
+        <span className={styles.ruleLabel}>Developper &amp; writter</span>
         <span className={styles.ruleRight} aria-hidden="true" />
       </div>
 
@@ -42,21 +42,15 @@ export default function Header() {
       </h1>
 
       <div data-parallax=".12" className={styles.infoRow}>
+        <p className={styles.intro}>
+          .
+        </p>
         <p className={styles.role}>
           Student
           <br />
           Full-stack &amp;
           <br />
           software developer
-        </p>
-        <p className={styles.intro}>
-          I build things that are read: an app for readers, engines that draw light one ray at a time, a quiet desk for people who write. I am at the beginning of a long apprenticeship, and I keep the notes.
-        </p>
-        <p className={styles.motto}>
-          Verba volant,
-          <br />
-          scripta manent.
-          <span className={styles.mottoTranslation}>Words fly, writing remains</span>
         </p>
       </div>
     </header>
