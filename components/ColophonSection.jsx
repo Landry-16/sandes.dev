@@ -14,7 +14,7 @@ export default function ColophonSection() {
   return (
     <Reveal as="section" id="colophon" className={styles.section}>
       <p className={styles.label}>Colophon</p>
-      <InkHeading className={styles.title}>Write to me and I will answer.</InkHeading>
+      <InkHeading className={styles.title}>Write to me and I will write to you.</InkHeading>
 
       <div className={styles.links}>
         {CONTACT_LINKS.map((link) => (
@@ -25,7 +25,7 @@ export default function ColophonSection() {
       </div>
 
       <p className={styles.edition}>
-        Set in Cormorant Garamond and EB Garamond, with IBM Plex Mono for the marginal hand. Composed by hand, MMXXVI.
+        Thank you for you interest.
       </p>
     </Reveal>
   );
