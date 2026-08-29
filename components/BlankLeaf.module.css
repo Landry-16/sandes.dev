@@ -1,0 +1,46 @@
+.article {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px clamp(20px, 4vw, 54px);
+  margin-top: clamp(24px, 5vh, 50px);
+  padding: clamp(26px, 5vh, 48px) clamp(16px, 2vw, 32px);
+  border: 1px dashed rgba(var(--gold-rgb), 0.22);
+}
+
+.folio {
+  flex: 0 0 auto;
+  width: 58px;
+  font-family: var(--font-display);
+  font-size: 34px;
+  color: var(--sepia-dimmer);
+}
+
+.body {
+  flex: 1 1 320px;
+}
+
+.title {
+  margin: 0 0 8px;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(24px, 2.6vw, 34px);
+  color: var(--sepia-note);
+}
+
+.text {
+  margin: 0;
+  max-width: 48ch;
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--sepia-muted);
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sepia-dimmer);
+}

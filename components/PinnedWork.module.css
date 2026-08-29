@@ -1,0 +1,120 @@
+.section {
+  position: relative;
+  z-index: 2;
+  height: 250vh;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.numeral {
+  position: absolute;
+  right: -2vw;
+  top: 50%;
+  font-family: var(--font-display);
+  font-size: min(62vh, 46vw);
+  line-height: 0.8;
+  color: rgba(var(--oxblood-rgb), 0.22);
+  pointer-events: none;
+  user-select: none;
+  transform: translateY(-50%);
+}
+
+.row {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1180px;
+  padding: 0 clamp(20px, 5vw, 88px);
+  display: flex;
+  flex-wrap: wrap-reverse;
+  align-items: center;
+  gap: clamp(24px, 4vw, 64px);
+}
+
+.text {
+  flex: 1 1 380px;
+  min-width: 260px;
+}
+
+.kind {
+  margin: 0 0 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--oxblood);
+}
+
+.kindRule {
+  width: 34px;
+  height: 1px;
+  background: var(--oxblood);
+}
+
+.title {
+  margin: 0 0 20px;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(40px, 7vw, 96px);
+  line-height: 0.94;
+  letter-spacing: -0.015em;
+}
+
+.blurb {
+  margin: 0 0 24px;
+  max-width: 48ch;
+  font-size: clamp(18px, 1.5vw, 22px);
+  line-height: 1.6;
+  color: var(--vellum-dim);
+  text-wrap: pretty;
+}
+
+.stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 22px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  padding: 6px 12px;
+  border: 1px solid rgba(var(--gold-rgb), 0.25);
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--sepia);
+}
+
+.note {
+  margin: 0;
+  max-width: 40ch;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 19px;
+  line-height: 1.45;
+  color: var(--sepia-note);
+}
+
+.plateColumn {
+  flex: 1 1 380px;
+  min-width: 260px;
+}
+
+.plateInner {
+  position: relative;
+  height: clamp(240px, 46vh, 460px);
+}
