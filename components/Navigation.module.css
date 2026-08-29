@@ -1,14 +1,14 @@
 .nav {
   position: sticky;
   top: 0;
-  z-index: 6;
+  z-index: 7;
   display: flex;
   flex-wrap: wrap;
   gap: 18px 28px;
   align-items: baseline;
   justify-content: space-between;
   padding: 22px 0 16px;
-  margin-bottom: clamp(40px, 8vh, 96px);
+  margin-bottom: clamp(30px, 6vh, 70px);
   background: linear-gradient(rgb(var(--ink-rgb)) 62%, rgba(var(--ink-rgb), 0));
   border-bottom: 1px solid rgba(var(--gold-rgb), 0.16);
 }

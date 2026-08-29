@@ -7,13 +7,14 @@
  */
 import { CONTACT_LINKS } from '@/lib/content';
 import Reveal from './Reveal';
+import InkHeading from './InkHeading';
 import styles from './ColophonSection.module.css';
 
 export default function ColophonSection() {
   return (
     <Reveal as="section" id="colophon" className={styles.section}>
       <p className={styles.label}>Colophon</p>
-      <h2 className={styles.title}>Write to me and I will answer.</h2>
+      <InkHeading className={styles.title}>Write to me and I will answer.</InkHeading>
 
       <div className={styles.links}>
         {CONTACT_LINKS.map((link) => (

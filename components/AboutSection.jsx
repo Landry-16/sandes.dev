@@ -1,6 +1,8 @@
 /**
  * On the Author: a drop-capped introduction, a footnoted closing line, and
- * an aside with the portrait plate and a short list of facts.
+ * an aside with the portrait plate and a short list of facts. The title
+ * row, the main text, and the aside each reveal independently as they
+ * scroll into view, rather than the section fading in as one block.
  *
  * @component
  * @returns {JSX.Element}
@@ -8,17 +10,17 @@
 import { FACTS } from '@/lib/content';
 import Reveal from './Reveal';
 import SectionTitle from './SectionTitle';
-import ImagePlate from './ImagePlate';
+import MagnetPlate from './MagnetPlate';
 import Footnote from './Footnote';
 import styles from './AboutSection.module.css';
 
 export default function AboutSection() {
   return (
-    <Reveal as="section" id="about" className={styles.section}>
+    <section id="about" className={styles.section}>
       <SectionTitle title="On the Author" label="Marginalia" />
 
       <div className={styles.content}>
-        <div className={styles.main}>
+        <Reveal className={styles.main}>
           <p className={styles.paragraph}>
             <span className={styles.dropCap}>I</span>
             am a student, and I write software the way one keeps a commonplace book: by copying out what works, annotating what doesn&apos;t, and returning to it later. Most of what I make sits somewhere between reading and computation: reading apps, rendering engines, writing tools.
@@ -30,15 +32,13 @@ export default function AboutSection() {
             Currently reading, building, and looking for work where I can learn from people who are better than me.
             <Footnote>Internships, apprenticeships, or open-source work. Hover is enough; email is better.</Footnote>
           </p>
-        </div>
+        </Reveal>
 
-        <aside className={styles.aside}>
-          <div className={styles.portraitFrame}>
-            <ImagePlate
-              caption="Portrait, candlelit, or a desk with books"
-              frameStyle={{ padding: '6px', borderColor: 'rgba(var(--gold-rgb), .22)' }}
-            />
-          </div>
+        <Reveal as="aside" className={styles.aside}>
+          <MagnetPlate
+            caption="Portrait, candlelit, or a desk with books"
+            frameStyle={{ height: '300px', marginBottom: '22px', borderColor: 'rgba(var(--gold-rgb), .22)', background: 'rgba(var(--panel-rgb), .55)' }}
+          />
           <p className={styles.portraitCaption}>Plate the first: the author at his desk.</p>
 
           {FACTS.map((f) => (
@@ -47,8 +47,8 @@ export default function AboutSection() {
               <p className={styles.factValue}>{f.value}</p>
             </div>
           ))}
-        </aside>
+        </Reveal>
       </div>
-    </Reveal>
+    </section>
   );
 }
