@@ -1,6 +1,7 @@
 /**
  * Section heading row shared by Works and About: a title on the left, a
- * small mono label on the right, a hairline underneath.
+ * small mono label on the right, a hairline underneath. Reveals itself on
+ * scroll, and its heading ink-bleeds into color independently.
  *
  * @component
  * @param {Object} props
@@ -11,13 +12,15 @@
  * @example
  * <SectionTitle title="Selected Works" label="I-IV" />
  */
+import Reveal from './Reveal';
+import InkHeading from './InkHeading';
 import styles from './SectionTitle.module.css';
 
 export default function SectionTitle({ title, label }) {
   return (
-    <div className={styles.row}>
-      <h2 className={styles.title}>{title}</h2>
+    <Reveal className={styles.row}>
+      <InkHeading className={styles.title}>{title}</InkHeading>
       <span className={styles.label}>{label}</span>
-    </div>
+    </Reveal>
   );
 }
