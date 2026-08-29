@@ -1,0 +1,16 @@
+.row {
+  display: flex;
+  align-items: center;
+  gap: clamp(24px, 4vw, 54px);
+  padding-right: clamp(24px, 4vw, 54px);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--sepia-dim);
+  white-space: nowrap;
+}
+
+.separator {
+  color: var(--oxblood);
+}

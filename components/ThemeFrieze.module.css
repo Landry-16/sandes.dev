@@ -1,0 +1,19 @@
+.row {
+  display: flex;
+  align-items: center;
+  gap: clamp(28px, 5vw, 64px);
+  padding-right: clamp(28px, 5vw, 64px);
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.4vw, 34px);
+  color: var(--numeral);
+  white-space: nowrap;
+}
+
+.italic {
+  font-style: italic;
+  color: var(--sepia);
+}
+
+.separator {
+  color: var(--oxblood);
+}

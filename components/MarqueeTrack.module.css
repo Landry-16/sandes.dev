@@ -1,0 +1,41 @@
+.wrap {
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  padding: 16px 0;
+  border-top: 1px solid rgba(var(--gold-rgb), 0.16);
+  border-bottom: 1px solid rgba(var(--gold-rgb), 0.16);
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.left {
+  animation-name: friezeL;
+}
+
+.right {
+  animation-name: friezeR;
+}
+
+@keyframes friezeL {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes friezeR {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
