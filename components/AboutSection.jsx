@@ -44,7 +44,7 @@ export default function AboutSection() {
 
         <Reveal as="aside" className={styles.aside}>
           <MagnetPlate
-            caption="Portrait, candlelit, or a desk with books"
+            caption="Tolerable human"
             frameStyle={{ height: '300px', marginBottom: '22px', borderColor: 'rgba(var(--gold-rgb), .22)', background: 'rgba(var(--panel-rgb), .55)' }}
           />
           <p className={styles.portraitCaption}>...</p>
