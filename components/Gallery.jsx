@@ -5,24 +5,27 @@
  * @component
  * @param {Object} props
  * @param {import('@/lib/content').GalleryPlate[]} props.images
- * @param {string} [props.maxHeight] - Cap on the stage height, e.g. 'clamp(240px, 46vh, 460px)'
+ * @param {string} [props.height] - Fixed height of the image stage, e.g. 'clamp(240px, 46vh, 460px)'
  * @param {React.CSSProperties} [props.frameStyle] - Overrides for the frame's border/background
  * @returns {JSX.Element}
  *
  * @description
- * Two image layers, not one: "under" always shows the fade's target
- * (harmlessly identical to "over" at rest, since it sits fully opaque the
- * whole time), and "over" shows the current image, fading to transparent
- * to reveal it. Swapping which index "over" points to only happens on
- * transitionend, once the fade is complete, so there is no mid-flight src
- * swap to keep in sync with animation timing.
+ * The stage is a fixed size regardless of which image is showing, and each
+ * image is composited from two layers so it never has to be cropped or
+ * scaled up to fill that box: a sharp copy sits centered at object-fit:
+ * contain (the whole image, always visible, never zoomed past its own
+ * resolution), over a blurred, darkened, object-fit: cover copy of the same
+ * image that fills whatever space the sharp copy's letterboxing leaves.
+ * The box always looks fully occupied without ever cropping or distorting
+ * the actual picture.
  *
- * The stage's aspect-ratio matches the current image's own dimensions
- * (from content data, not measured at runtime, so there's no load-triggered
- * layout shift), so object-fit: contain neither crops nor letterboxes it -
- * the box just takes the image's shape, up to maxHeight. It only updates
- * once a fade completes, so a flip between differently-shaped images
- * doesn't resize the box out from under the transition in progress.
+ * Two full slides, not one: "under" always shows the fade's target
+ * (harmlessly identical to "over" at rest, since it sits fully opaque the
+ * whole time), and "over" (holding both the backdrop and sharp layers for
+ * the current image) fades to transparent as a unit to reveal it. Swapping
+ * which index "over" points to only happens on transitionend, once the
+ * fade is complete, so there is no mid-flight src swap to keep in sync
+ * with animation timing.
  */
 'use client';
 
@@ -49,7 +52,19 @@ function toRoman(num) {
 
 const SWIPE_THRESHOLD = 40;
 
-export default function Gallery({ images, maxHeight, frameStyle }) {
+/** The backdrop + sharp image pair for one slide. */
+function Plate({ image }) {
+  return (
+    <>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={image.src} alt="" aria-hidden="true" className={styles.backdrop} />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={image.src} alt={image.caption} className={styles.foreground} />
+    </>
+  );
+}
+
+export default function Gallery({ images, height, frameStyle }) {
   const [index, setIndex] = useState(0);
   const [pending, setPending] = useState(null); // null | target index
   const touchRef = useRef(null);
@@ -57,10 +72,6 @@ export default function Gallery({ images, maxHeight, frameStyle }) {
   const count = images.length;
   const current = images[index];
   const under = images[pending ?? index];
-  const stageStyle = {
-    maxHeight,
-    aspectRatio: current.width && current.height ? `${current.width} / ${current.height}` : undefined,
-  };
 
   const goTo = (target) => {
     if (pending !== null || target === index) return;
@@ -113,22 +124,18 @@ export default function Gallery({ images, maxHeight, frameStyle }) {
       <div className={styles.frame} style={frameStyle}>
         <div
           className={styles.stage}
-          style={stageStyle}
+          style={{ height }}
           onPointerDown={handlePointerDown}
           onPointerUp={handlePointerUp}
         >
-          <div className={styles.slide}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={under.src} alt="" aria-hidden="true" className={`${styles.image} ${styles.under}`} />
+          <div className={`${styles.slide} ${styles.under}`}>
+            <Plate image={under} />
           </div>
-          <div className={styles.slide}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={current.src}
-              alt={current.caption}
-              className={`${styles.image} ${styles.over} ${pending !== null ? styles.fading : ''}`}
-              onTransitionEnd={handleTransitionEnd}
-            />
+          <div
+            className={`${styles.slide} ${styles.over} ${pending !== null ? styles.fading : ''}`}
+            onTransitionEnd={handleTransitionEnd}
+          >
+            <Plate image={current} />
           </div>
 
           <div className={styles.controls}>
