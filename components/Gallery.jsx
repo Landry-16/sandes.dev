@@ -1,8 +1,6 @@
 /**
- * A page-turnable showcase of images: arrow buttons, keyboard, and swipe
- * all flip through the set with a 3D page-turn (the current image pivots
- * off the trailing edge like a leaf turning, revealing the next one
- * underneath).
+ * A showcase of images with a simple crossfade between them: arrow
+ * buttons, keyboard, and swipe all navigate the same way.
  *
  * @component
  * @param {Object} props
@@ -12,13 +10,12 @@
  * @returns {JSX.Element}
  *
  * @description
- * Two image layers, not one: "under" always shows the flip's target
- * (harmlessly identical to "over" at rest), and "over" shows the current
- * image, animated via CSS transition on transform. Swapping which index
- * "over" points to only happens on transitionend, once the page is fully
- * turned, so nothing needs mid-flight src swapping. Reduced-motion users
- * get the same mechanism at a near-zero transition duration via the
- * global stylesheet, rather than a separately maintained non-animated path.
+ * Two image layers, not one: "under" always shows the fade's target
+ * (harmlessly identical to "over" at rest, since it sits fully opaque the
+ * whole time), and "over" shows the current image, fading to transparent
+ * to reveal it. Swapping which index "over" points to only happens on
+ * transitionend, once the fade is complete, so there is no mid-flight src
+ * swap to keep in sync with animation timing.
  */
 'use client';
 
@@ -47,25 +44,25 @@ const SWIPE_THRESHOLD = 40;
 
 export default function Gallery({ images, height, frameStyle }) {
   const [index, setIndex] = useState(0);
-  const [flip, setFlip] = useState(null); // null | { direction: 'next' | 'prev', target: number }
+  const [pending, setPending] = useState(null); // null | target index
   const touchRef = useRef(null);
 
   const count = images.length;
   const current = images[index];
-  const under = images[flip ? flip.target : index];
+  const under = images[pending ?? index];
 
-  const goTo = (target, direction) => {
-    if (flip || target === index) return;
-    setFlip({ direction, target });
+  const goTo = (target) => {
+    if (pending !== null || target === index) return;
+    setPending(target);
   };
 
-  const next = () => goTo((index + 1) % count, 'next');
-  const prev = () => goTo((index - 1 + count) % count, 'prev');
+  const next = () => goTo((index + 1) % count);
+  const prev = () => goTo((index - 1 + count) % count);
 
   const handleTransitionEnd = (e) => {
-    if (e.propertyName !== 'transform' || !flip) return;
-    setIndex(flip.target);
-    setFlip(null);
+    if (e.propertyName !== 'opacity' || pending === null) return;
+    setIndex(pending);
+    setPending(null);
   };
 
   const handleKeyDown = (e) => {
@@ -93,15 +90,6 @@ export default function Gallery({ images, height, frameStyle }) {
     else prev();
   };
 
-  const overClass = [
-    styles.image,
-    styles.over,
-    flip?.direction === 'next' ? styles.overFlippingNext : '',
-    flip?.direction === 'prev' ? styles.overFlippingPrev : '',
-  ]
-    .filter(Boolean)
-    .join(' ');
-
   return (
     <div
       className={styles.wrap}
@@ -127,16 +115,16 @@ export default function Gallery({ images, height, frameStyle }) {
             <img
               src={current.src}
               alt={current.caption}
-              className={overClass}
+              className={`${styles.image} ${styles.over} ${pending !== null ? styles.fading : ''}`}
               onTransitionEnd={handleTransitionEnd}
             />
           </div>
 
           <div className={styles.controls}>
-            <button type="button" className={styles.arrow} onClick={prev} disabled={!!flip} aria-label="Previous render">
+            <button type="button" className={styles.arrow} onClick={prev} disabled={pending !== null} aria-label="Previous render">
               &#8249;
             </button>
-            <button type="button" className={styles.arrow} onClick={next} disabled={!!flip} aria-label="Next render">
+            <button type="button" className={styles.arrow} onClick={next} disabled={pending !== null} aria-label="Next render">
               &#8250;
             </button>
           </div>
@@ -156,7 +144,7 @@ export default function Gallery({ images, height, frameStyle }) {
             key={img.src}
             type="button"
             className={`${styles.dot} ${i === index ? styles.dotActive : ''}`}
-            onClick={() => goTo(i, i > index ? 'next' : 'prev')}
+            onClick={() => goTo(i)}
             aria-label={`Go to render ${i + 1}`}
             aria-current={i === index ? 'true' : undefined}
           />
