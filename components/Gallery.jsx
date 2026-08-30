@@ -7,6 +7,8 @@
  * @param {import('@/lib/content').GalleryPlate[]} props.images
  * @param {string} [props.height] - Fixed height of the image stage, e.g. 'clamp(240px, 46vh, 460px)'
  * @param {React.CSSProperties} [props.frameStyle] - Overrides for the frame's border/background
+ * @param {string} [props.repoUrl] - If set, the picture itself becomes a link to this URL (with a
+ *   "View repository" label fading in on hover), opened in a new tab
  * @returns {JSX.Element}
  *
  * @description
@@ -26,6 +28,14 @@
  * which index "over" points to only happens on transitionend, once the
  * fade is complete, so there is no mid-flight src swap to keep in sync
  * with animation timing.
+ *
+ * The optional link overlay sits above the pictures but below the arrow
+ * buttons (same pointer-events-none-except-children trick the arrows
+ * already use), so it never intercepts a click meant for a control. A
+ * swipe is not a click: whether the last pointer gesture crossed the
+ * swipe threshold is tracked in a ref, and the link's own click handler
+ * checks it, calling preventDefault so a drag-release never also opens
+ * the browser's default navigation for the anchor underneath it.
  */
 'use client';
 
@@ -64,10 +74,11 @@ function Plate({ image }) {
   );
 }
 
-export default function Gallery({ images, height, frameStyle }) {
+export default function Gallery({ images, height, frameStyle, repoUrl }) {
   const [index, setIndex] = useState(0);
   const [pending, setPending] = useState(null); // null | target index
   const touchRef = useRef(null);
+  const lastWasSwipe = useRef(false);
 
   const count = images.length;
   const current = images[index];
@@ -104,12 +115,21 @@ export default function Gallery({ images, height, frameStyle }) {
   const handlePointerUp = (e) => {
     const start = touchRef.current;
     touchRef.current = null;
-    if (!start) return;
+    if (!start) {
+      lastWasSwipe.current = false;
+      return;
+    }
     const dx = e.clientX - start.x;
     const dy = e.clientY - start.y;
-    if (Math.abs(dx) < SWIPE_THRESHOLD || Math.abs(dx) < Math.abs(dy)) return;
+    const isSwipe = Math.abs(dx) >= SWIPE_THRESHOLD && Math.abs(dx) >= Math.abs(dy);
+    lastWasSwipe.current = isSwipe;
+    if (!isSwipe) return;
     if (dx < 0) next();
     else prev();
+  };
+
+  const handleLinkClick = (e) => {
+    if (lastWasSwipe.current) e.preventDefault();
   };
 
   return (
@@ -137,6 +157,19 @@ export default function Gallery({ images, height, frameStyle }) {
           >
             <Plate image={current} />
           </div>
+
+          {repoUrl && (
+            <a
+              href={repoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.repoOverlay}
+              onClick={handleLinkClick}
+              aria-label="View repository on GitHub"
+            >
+              <span className={styles.repoLabel}>View repository</span>
+            </a>
+          )}
 
           <div className={styles.controls}>
             <button type="button" className={styles.arrow} onClick={prev} disabled={pending !== null} aria-label="Previous render">

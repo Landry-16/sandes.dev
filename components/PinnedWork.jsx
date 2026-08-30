@@ -12,6 +12,9 @@
  * pin choreography (which fades/scales/translates whatever fills
  * [data-pin-plate] as one unit) looks identical either way.
  *
+ * When the work has a `repo`, a "View repository" link appears under the
+ * note, and (for a gallery work) clicking the picture itself also opens it.
+ *
  * @component
  * @param {Object} props
  * @param {import('@/lib/content').Work} props.work
@@ -48,11 +51,16 @@ export default function PinnedWork({ work }) {
               ))}
             </div>
             <p className={styles.note}>{work.note}</p>
+            {work.repo && (
+              <a href={work.repo} target="_blank" rel="noopener noreferrer" className={styles.repoLink}>
+                View repository
+              </a>
+            )}
           </div>
 
           <div data-pin-plate="1" className={styles.plateColumn}>
             {work.gallery ? (
-              <Gallery images={work.gallery} height={PLATE_HEIGHT} frameStyle={PLATE_FRAME_STYLE} />
+              <Gallery images={work.gallery} height={PLATE_HEIGHT} frameStyle={PLATE_FRAME_STYLE} repoUrl={work.repo} />
             ) : (
               <MagnetPlate
                 caption={work.plate}

@@ -67,6 +67,46 @@
   opacity: 0;
 }
 
+.repoOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 12px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.repoLabel {
+  padding: 6px 12px;
+  border: 1px solid rgba(var(--gold-rgb), 0.4);
+  background: rgba(var(--ink-rgb), 0.85);
+  color: var(--gold);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 250ms ease,
+    transform 250ms ease;
+}
+
+.repoOverlay:hover .repoLabel,
+.repoOverlay:focus-visible .repoLabel {
+  opacity: 1;
+  transform: none;
+}
+
+.repoOverlay:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: -2px;
+}
+
 .controls {
   position: absolute;
   inset: 0;
