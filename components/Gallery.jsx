@@ -5,7 +5,7 @@
  * @component
  * @param {Object} props
  * @param {import('@/lib/content').GalleryPlate[]} props.images
- * @param {string} [props.height] - Height of the image stage, e.g. 'clamp(240px, 46vh, 460px)'
+ * @param {string} [props.maxHeight] - Cap on the stage height, e.g. 'clamp(240px, 46vh, 460px)'
  * @param {React.CSSProperties} [props.frameStyle] - Overrides for the frame's border/background
  * @returns {JSX.Element}
  *
@@ -16,6 +16,13 @@
  * to reveal it. Swapping which index "over" points to only happens on
  * transitionend, once the fade is complete, so there is no mid-flight src
  * swap to keep in sync with animation timing.
+ *
+ * The stage's aspect-ratio matches the current image's own dimensions
+ * (from content data, not measured at runtime, so there's no load-triggered
+ * layout shift), so object-fit: contain neither crops nor letterboxes it -
+ * the box just takes the image's shape, up to maxHeight. It only updates
+ * once a fade completes, so a flip between differently-shaped images
+ * doesn't resize the box out from under the transition in progress.
  */
 'use client';
 
@@ -42,7 +49,7 @@ function toRoman(num) {
 
 const SWIPE_THRESHOLD = 40;
 
-export default function Gallery({ images, height, frameStyle }) {
+export default function Gallery({ images, maxHeight, frameStyle }) {
   const [index, setIndex] = useState(0);
   const [pending, setPending] = useState(null); // null | target index
   const touchRef = useRef(null);
@@ -50,6 +57,10 @@ export default function Gallery({ images, height, frameStyle }) {
   const count = images.length;
   const current = images[index];
   const under = images[pending ?? index];
+  const stageStyle = {
+    maxHeight,
+    aspectRatio: current.width && current.height ? `${current.width} / ${current.height}` : undefined,
+  };
 
   const goTo = (target) => {
     if (pending !== null || target === index) return;
@@ -102,7 +113,7 @@ export default function Gallery({ images, height, frameStyle }) {
       <div className={styles.frame} style={frameStyle}>
         <div
           className={styles.stage}
-          style={{ height }}
+          style={stageStyle}
           onPointerDown={handlePointerDown}
           onPointerUp={handlePointerUp}
         >

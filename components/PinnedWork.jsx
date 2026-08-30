@@ -52,7 +52,7 @@ export default function PinnedWork({ work }) {
 
           <div data-pin-plate="1" className={styles.plateColumn}>
             {work.gallery ? (
-              <Gallery images={work.gallery} height={PLATE_HEIGHT} frameStyle={PLATE_FRAME_STYLE} />
+              <Gallery images={work.gallery} maxHeight={PLATE_HEIGHT} frameStyle={PLATE_FRAME_STYLE} />
             ) : (
               <MagnetPlate
                 caption={work.plate}
