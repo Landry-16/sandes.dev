@@ -15,7 +15,7 @@ export default function BlankLeaf() {
       <div className={styles.body}>
         <h3 className={styles.title}>Leaf left blank</h3>
         <p className={styles.text}>
-          Reserved for the next thing. The folio is built to take more entries without rearranging the ones before it.
+          Reserved for the next big thing. The folio is built to take more entries without rearranging the ones before it.
         </p>
       </div>
       <span className={styles.label}>In preparation</span>
