@@ -7,13 +7,22 @@
  * opacity/transform/filter directly onto the [data-pin-text],
  * [data-pin-plate], and [data-pin-numeral] children.
  *
+ * When the work has a `gallery`, it renders as a page-turnable Gallery
+ * instead of a single MagnetPlate, sized and framed the same way so the
+ * pin choreography (which fades/scales/translates whatever fills
+ * [data-pin-plate] as one unit) looks identical either way.
+ *
  * @component
  * @param {Object} props
  * @param {import('@/lib/content').Work} props.work
  * @returns {JSX.Element}
  */
 import MagnetPlate from './MagnetPlate';
+import Gallery from './Gallery';
 import styles from './PinnedWork.module.css';
+
+const PLATE_HEIGHT = 'clamp(240px, 46vh, 460px)';
+const PLATE_FRAME_STYLE = { borderColor: 'rgba(var(--gold-rgb), .24)', background: 'rgba(var(--panel-rgb), .6)' };
 
 export default function PinnedWork({ work }) {
   return (
@@ -32,8 +41,8 @@ export default function PinnedWork({ work }) {
             <h3 className={styles.title}>{work.title}</h3>
             <p className={styles.blurb}>{work.blurb}</p>
             <div className={styles.stack}>
-              {work.stack.map((s) => (
-                <span key={s} className={styles.chip}>
+              {work.stack.map((s, i) => (
+                <span key={`${s}-${i}`} className={styles.chip}>
                   {s}
                 </span>
               ))}
@@ -42,12 +51,16 @@ export default function PinnedWork({ work }) {
           </div>
 
           <div data-pin-plate="1" className={styles.plateColumn}>
-            <MagnetPlate
-              caption={work.plate}
-              showOverlayCaption
-              contentHeight="clamp(240px, 46vh, 460px)"
-              frameStyle={{ borderColor: 'rgba(var(--gold-rgb), .24)', background: 'rgba(var(--panel-rgb), .6)' }}
-            />
+            {work.gallery ? (
+              <Gallery images={work.gallery} height={PLATE_HEIGHT} frameStyle={PLATE_FRAME_STYLE} />
+            ) : (
+              <MagnetPlate
+                caption={work.plate}
+                showOverlayCaption
+                contentHeight={PLATE_HEIGHT}
+                frameStyle={PLATE_FRAME_STYLE}
+              />
+            )}
           </div>
         </div>
       </div>
